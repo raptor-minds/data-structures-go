@@ -78,7 +78,7 @@ func DeleteMax(H MaxHeap) (ElementType, error) {
 		if Child != H.Size && H.Data[Child] < H.Data[Child+1] {
 			Child += 1
 		}
-		if X > H.Data[Child] {
+		if X >= H.Data[Child] {
 			break //找到了合适的位置
 		} else {
 			H.Data[Parent] = H.Data[Child]
@@ -91,10 +91,11 @@ func DeleteMax(H MaxHeap) (ElementType, error) {
 
 /* 建造最大堆 */
 func PercDown(H MaxHeap, p int) {
+	/* 下滤：将H中以H->Data[p]为根的子堆调整为最大堆 */
 	var Parent, Child int
 	var X ElementType
-	X = H.Data[p]
-	for Parent = 1; Parent*2 <= H.Size; Parent = Child {
+	X = H.Data[p] /* 取出根结点存放的值 */
+	for Parent = p; Parent*2 <= H.Size; Parent = Child {
 		Child = Parent * 2
 		if Child != H.Size && H.Data[Child] < H.Data[Child+1] {
 			Child += 1
@@ -107,10 +108,10 @@ func PercDown(H MaxHeap, p int) {
 	}
 
 	H.Data[Parent] = X
-
 }
 
 func BuildHeap(H MaxHeap) {
+	/* 从最后一个结点的父节点开始，到根结点1 */
 	for i := H.Size / 2; i > 0; i-- {
 		PercDown(H, i)
 	}

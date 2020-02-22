@@ -28,3 +28,16 @@ func TestInsert(t *testing.T) {
 	}
 	assert.Equal(t, 0, H.Size)
 }
+
+func testArray(array *[]int)  {
+	fmt.Printf("%p", array)
+}
+
+func TestArray(t *testing.T) {
+	a := make([]int, 5)
+	for i:=0; i< 5; i++ {
+		a[i] = i
+	}
+	fmt.Printf("%p", &a)
+	testArray(&a)
+}
