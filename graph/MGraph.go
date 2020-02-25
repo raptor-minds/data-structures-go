@@ -1,11 +1,13 @@
 package graph
 
+import "fmt"
+
 const MaxVertexNum = 100 /* 最大顶点数设为100 */
 const INFINITY = 65535
 
 type Vertex int
 type WeightType int
-type DataType string
+type DataType bool
 
 type ENode struct {
 	Weight WeightType //权重
@@ -37,7 +39,7 @@ func CreateGraph(vertexNum int) MGraph {
 	/* 注意：这里默认顶点编号从0开始，到(Graph->Nv - 1) */
 	for v := 0; v < graph.Nv; v++ {
 		for w := 0; w < graph.Nv; w++ {
-			graph.Matrix[v][w] = INFINITY
+			graph.Matrix[v][w] = 0
 		}
 	}
 
@@ -49,4 +51,23 @@ func InsertEdge(G MGraph, E Edge) {
 	G.Matrix[E.V1][E.V2] = E.Weight
 	//无向图
 	G.Matrix[E.V2][E.V1] = E.Weight
+
+	G.Ne++
+}
+
+func PrintMGraphMatrix(G MGraph) {
+	matrix := G.Matrix
+	fmt.Println(G.Nv, G.Ne)
+	fmt.Print("G : ")
+	for i := 0; i < G.Nv; i++ {
+		fmt.Print(i, " ")
+	}
+	fmt.Println()
+	for i := 0; i < G.Nv; i++ {
+		fmt.Printf("%d : ", i)
+		for j := 0; j < G.Nv; j++ {
+			fmt.Print(matrix[i][j], " ")
+		}
+		fmt.Println()
+	}
 }
