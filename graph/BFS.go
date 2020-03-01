@@ -31,8 +31,8 @@ func IsEmpty(queue Queue) bool {
 
 func DeleteQ(queue Queue) Vertex {
 	queue.size -= 1
-	v := queue.data[queue.size]
-	queue.data[queue.size] = 0
+	v := queue.data[0]
+	queue.data = queue.data[1:]
 	return v
 }
 

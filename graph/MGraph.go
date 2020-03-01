@@ -2,7 +2,7 @@ package graph
 
 import "fmt"
 
-const MaxVertexNum = 100 /* 最大顶点数设为100 */
+const MaxVertexNum = 10 /* 最大顶点数设为100 */
 const INFINITY = 65535
 
 type Vertex int
@@ -39,7 +39,11 @@ func CreateGraph(vertexNum int) MGraph {
 	/* 注意：这里默认顶点编号从0开始，到(Graph->Nv - 1) */
 	for v := 0; v < graph.Nv; v++ {
 		for w := 0; w < graph.Nv; w++ {
-			graph.Matrix[v][w] = 0
+			if v == w {
+				graph.Matrix[v][w] = 0
+			} else {
+				graph.Matrix[v][w] = INFINITY
+			}
 		}
 	}
 
@@ -50,7 +54,7 @@ func InsertEdge(G MGraph, E Edge) {
 	// insert edge
 	G.Matrix[E.V1][E.V2] = E.Weight
 	//无向图
-	G.Matrix[E.V2][E.V1] = E.Weight
+	//G.Matrix[E.V2][E.V1] = E.Weight
 
 	G.Ne++
 }

@@ -74,6 +74,12 @@ func TestBFS(t *testing.T) {
 		V2:     4,
 	})
 
+	InsertEdge(MGraph, &ENode{
+		Weight: 1,
+		V1:     1,
+		V2:     8,
+	})
+
 	PrintMGraphMatrix(MGraph)
 
 	BFS(MGraph, 2)

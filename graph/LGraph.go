@@ -44,22 +44,22 @@ func InsertLinkedEdge(Graph LGraph, E Edge) {
 	Graph.G[E.V1].FistEdge = &newNode
 
 	//如果是无向图
-	node := AdjVNode{
-		AdjV:   E.V1,
-		Weight: E.Weight,
-		Next:   Graph.G[E.V2].FistEdge,
-	}
-
-	Graph.G[E.V2].FistEdge = &node
+	//node := AdjVNode{
+	//	AdjV:   E.V1,
+	//	Weight: E.Weight,
+	//	Next:   Graph.G[E.V2].FistEdge,
+	//}
+	//
+	//Graph.G[E.V2].FistEdge = &node
 
 	Graph.Ne++
 }
 
 func PrintLGraph(graph LGraph) {
-	for i := 0; i < graph.Nv; i++ {
+	for i := 1; i <= graph.Nv; i++ {
 		fmt.Printf("%d :", i)
 		for w := graph.G[i].FistEdge; w != nil; w = w.Next {
-			fmt.Print("-->", w.AdjV)
+			fmt.Print("-->", w.AdjV, "(", w.Weight, ")")
 		}
 		fmt.Println()
 	}
